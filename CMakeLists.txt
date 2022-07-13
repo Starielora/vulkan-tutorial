@@ -20,6 +20,7 @@ project(vulkan-tutorial)
     target_include_directories(vulkan-tutorial
         PRIVATE
             ${Vulkan_INCLUDE_DIRS}
+            deps
     )
 
     add_custom_target(compile-vertex-shader
@@ -47,6 +48,6 @@ project(vulkan-tutorial)
     add_custom_command(
         TARGET vulkan-tutorial
         POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/shaders/vert.spv ${CMAKE_CURRENT_LIST_DIR}/shaders/frag.spv $<TARGET_FILE_DIR:vulkan-tutorial>
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/shaders/vert.spv ${CMAKE_CURRENT_LIST_DIR}/shaders/frag.spv ${CMAKE_CURRENT_LIST_DIR}/textures/texture.jpg $<TARGET_FILE_DIR:vulkan-tutorial>
         COMMENT "Copying shader files to exe output dir"
     )
