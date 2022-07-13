@@ -24,7 +24,7 @@ project(vulkan-tutorial)
     )
 
     add_custom_target(compile-vertex-shader
-        COMMAND ${Vulkan_GLSLC_EXECUTABLE} shader.vert -o vert.spv
+        COMMAND ${Vulkan_GLSLC_EXECUTABLE} shader.vert -o $<TARGET_FILE_DIR:vulkan-tutorial>/vert.spv
         WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/shaders
         VERBATIM
         COMMENT "Compiling vertex shader"
@@ -33,7 +33,7 @@ project(vulkan-tutorial)
     )
 
     add_custom_target(compile-fragment-shader
-        COMMAND ${Vulkan_GLSLC_EXECUTABLE} shader.frag -o frag.spv
+        COMMAND ${Vulkan_GLSLC_EXECUTABLE} shader.frag -o $<TARGET_FILE_DIR:vulkan-tutorial>/frag.spv
         WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/shaders
         VERBATIM
         COMMENT "Compiling fragment shader"
@@ -48,6 +48,6 @@ project(vulkan-tutorial)
     add_custom_command(
         TARGET vulkan-tutorial
         POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/shaders/vert.spv ${CMAKE_CURRENT_LIST_DIR}/shaders/frag.spv ${CMAKE_CURRENT_LIST_DIR}/textures/texture.jpg $<TARGET_FILE_DIR:vulkan-tutorial>
-        COMMENT "Copying shader files to exe output dir"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_LIST_DIR}/textures/texture.jpg $<TARGET_FILE_DIR:vulkan-tutorial>
+        COMMENT "Copying texture to exe output dir"
     )
